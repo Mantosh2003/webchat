@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Chat Interface</title>
+  <link rel ="stylesheet"href="style.css"/>
+  <script src ="script.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .chat-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+    }
+    .chat-header {
+      background: #007bff;
+      color: #fff;
+      padding: 15px;
+      font-size: 20px;
+      text-align: center;
+    }
+    .chat-messages {
+      flex-grow: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+    .message {
+      margin: 10px 0;
+    }
+    .message.user1 {
+      text-align: left;
+      color: #333;
+    }
+    .message.user2 {
+      text-align: right;
+      color: #007bff;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    .chat-input button {
+      padding: 10px 15px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">User-to-User Chat</div>
+  <div class="chat-messages" id="chatBox"></div>
+  <div class="chat-input">
+    <input type="text" id="messageInput" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  let currentUser = 'user1'; // Toggle between 'user1' and 'user2'
+
+  function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const message = input.value.trim();
+    if (message === '') return;
+
+    const chatBox = document.getElementById('chatBox');
+    const messageElem = document.createElement('div');
+    messageElem.className = `message ${currentUser}`;
+    messageElem.textContent = message;
+    chatBox.appendChild(messageElem);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    input.value = '';
+    // Toggle user (simulate 2 users on same screen)
+    currentUser = currentUser === 'user1' ? 'user2' : 'user1';
+  }
+</script>
+
+</body>
+</html
